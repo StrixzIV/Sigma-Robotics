@@ -1,8 +1,11 @@
-BRAUDRATE = 
+BRAUDRATE = 9600
 PORT = 
 SRC_PATH = .
 
 all: upload
+
+check:
+	arduino-cli compile --fqbn arduino:avr:uno $(SRC_PATH)
 
 upload:
 	arduino-cli compile --fqbn arduino:avr:uno --port $(PORT) --upload $(SRC_PATH)
