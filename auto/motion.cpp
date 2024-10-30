@@ -7,48 +7,32 @@ void	set_motor(int in_1, int in_2, int in_3, int in_4) {
 	digitalWrite(IN_4, in_4);
 }
 
-void fwd() {
-
+void fwd(int speed) {
 	set_motor(HIGH, LOW, HIGH, LOW);
-
-	for (int en = 40; en < 100; en++) {
-		analogWrite(EN_A, en);
-		analogWrite(EN_B, en);
-		delay(10);
-	}
-	
-	delay(500);
-
+	analogWrite(EN_A, speed);
+	analogWrite(EN_B, speed);
 }
 
-void bwd() {
-
+void bwd(int speed) {
 	set_motor(LOW, HIGH, LOW, HIGH);
-
-	for (int en = 40; en < 100; en++) {
-		analogWrite(EN_A, en);
-		analogWrite(EN_B, en);
-		delay(10);
-	}
-
-	delay(500);
-
+	analogWrite(EN_A, speed);
+	analogWrite(EN_B, speed);
 }
 
 void stop() {
 	set_motor(LOW, LOW, LOW, LOW);
-	analogWrite(EN_A, 0);
-	analogWrite(EN_B, 0);
+	analogWrite(EN_A, 80);
+	analogWrite(EN_B, 80);
 }
 
-void	rot_left() {
+void	rot_left(int speed) {
 	set_motor(HIGH, LOW, LOW, HIGH);
-	analogWrite(EN_A, 100);
-	analogWrite(EN_B, 100);
+	analogWrite(EN_A, speed);
+	analogWrite(EN_B, speed);
 }
 
-void	rot_right() {
+void	rot_right(int speed) {
 	set_motor(LOW, HIGH, HIGH, LOW);
-	analogWrite(EN_A, 100);
-	analogWrite(EN_B, 100);
+	analogWrite(EN_A, speed);
+	analogWrite(EN_B, speed);
 }

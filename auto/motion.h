@@ -10,12 +10,14 @@
 # define IN_3 10
 # define IN_4 11
 
+// # define MIN_SPEED 100
+
 void	stop();
 
-void	fwd();
-void	bwd();
+void	fwd(int speed);
+void	bwd(int speed);
 
-void	rot_left();
-void	rot_right();
+void	rot_left(int speed);
+void	rot_right(int speed);
 
 #endif

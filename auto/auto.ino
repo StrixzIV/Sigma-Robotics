@@ -1,27 +1,55 @@
+#include "gyro.h"
 #include "motion.h"
 
-void setup() {
+MPU6050 		mpu(Wire);
+t_telemetry		telemetry;
 
-	pinMode(EN_A, OUTPUT);
-	pinMode(EN_B, OUTPUT);
+void rot_right_90(t_telemetry *telemetry, int correction_factor) {
 
-	pinMode(IN_1, OUTPUT);
-	pinMode(IN_2, OUTPUT);
-	pinMode(IN_3, OUTPUT);
-	pinMode(IN_4, OUTPUT);
+	float initial_angle;
+	float final_angle;
 
-    Serial.begin(9600);
+	update_telemetry(telemetry, mpu);
+	initial_angle = telemetry->angle_y;
 
-	rot_left();
-	delay(400);
+	rot_right(100);
+	delay(300);
+	
 	stop();
+	delay(1000);
+	update_telemetry(telemetry, mpu);
+	final_angle = telemetry->angle_y;
 
-	delay(1500);
-
-	rot_right();
-	delay(400);
+	rot_left(100);
+	delay(correction_factor * abs(initial_angle - final_angle));
 	stop();
+	delay(500);
 
 }
 
-void loop() {}
+void setup() {
+
+	Serial.begin(9600);
+	Wire.begin();
+	if (mpu.begin())
+		Serial.println("Gyro Error.");
+	mpu.calcOffsets();
+
+	fwd(100);
+	delay(1000);
+	stop();
+	delay(500);
+	rot_right_90(&telemetry, 125);
+	
+	fwd(100);
+	delay(1000);
+	stop();
+	delay(500);
+	rot_right_90(&telemetry, 125);
+	
+}
+
+void loop() {
+	
+	
+}
