@@ -88,3 +88,24 @@ void rot_left_90(MPU6050 &imu, t_telemetry *telemetry, int correction_factor) {
 	delay(500);
 
 }
+
+void forward_and_rotate(MPU6050 &imu, t_telemetry *telemetry, int forward_duration, int correction_factor, t_direction direction) {
+
+	fwd(100);
+	delay(forward_duration);
+	stop();
+	delay(800);
+
+	switch (direction) {
+
+		case LEFT:
+			rot_left_90(imu, telemetry, correction_factor);
+			break ;
+
+		case RIGHT:
+			rot_right_90(imu, telemetry, correction_factor);
+			break ;
+
+	}
+
+}
