@@ -16,7 +16,7 @@ void	set_motor(int in_1, int in_2, int in_3, int in_4) {
 void fwd(int speed) {
 	set_motor(HIGH, LOW, HIGH, LOW);
 	analogWrite(EN_A, speed);
-	analogWrite(EN_B, speed + 1);
+	analogWrite(EN_B, speed + 5);
 }
 
 void bwd(int speed) {
@@ -53,8 +53,8 @@ void rot_right_90(MPU6050 &imu, t_telemetry *telemetry, int correction_factor) {
 
 	rot_right(100);
 	delay(300);
-	
 	stop();
+
 	delay(1000);
 	update_telemetry(telemetry, imu);
 	final_angle = telemetry->angle_y;
@@ -75,9 +75,9 @@ void rot_left_90(MPU6050 &imu, t_telemetry *telemetry, int correction_factor) {
 	initial_angle = telemetry->angle_y;
 
 	rot_left(100);
-	delay(300);
-	
+	delay(300);	
 	stop();
+	
 	delay(1000);
 	update_telemetry(telemetry, imu);
 	final_angle = telemetry->angle_y;
@@ -91,7 +91,7 @@ void rot_left_90(MPU6050 &imu, t_telemetry *telemetry, int correction_factor) {
 
 void forward_and_rotate(MPU6050 &imu, t_telemetry *telemetry, int forward_duration, int correction_factor, t_direction direction) {
 
-	fwd(100);
+	fwd(105);
 	delay(forward_duration);
 	stop();
 	delay(800);
