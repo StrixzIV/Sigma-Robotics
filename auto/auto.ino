@@ -47,7 +47,7 @@ void setup() {
 
 	forward_and_rotate(mpu, &telemetry, 900, 200, LEFT);
 	bwd(115);
-	delay(800);
+	delay(1000);
 
 	switch (DESTINATION) {
 
